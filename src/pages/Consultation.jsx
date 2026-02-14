@@ -146,7 +146,7 @@ const Consultation = () => {
             deepTitle: "Horoscope Report",
             deepSubtitle: "Full Birth Chart",
             deepDesc: "Calculation report for 2 years. Forecast for 1 year",
-            deepPrice: "₹700",
+            deepPrice: "₹701",
 
             kundaliTitle: "Prashna Kundali",
             kundaliSubtitle: "One Specific Question",
@@ -217,10 +217,10 @@ const Consultation = () => {
             steps: ["సేవను ఎంచుకోండి", "మీ వివరాలు", "చెల్లింపు", "నిర్ధారణ"],
             turnaround: "మీకు సమాధానం 24 గంటల లోపల ఇవ్వబడును",
 
-            deepTitle: "జాతక నివేదిక",
+            deepTitle: "జాతక విశ్లేషణ",
             deepSubtitle: "పూర్తి జాతక చక్రం",
             deepDesc: "2 సంవత్సరాల గణన నివేదిక. 1 సంవత్సరం అంచనా.",
-            deepPrice: "₹700",
+            deepPrice: "₹701",
 
             kundaliTitle: "ప్రశ్న కుండలి",
             kundaliSubtitle: "ఒక నిర్దిష్ట ప్రశ్న",
@@ -433,7 +433,8 @@ const Consultation = () => {
             const orderData = await orderRes.json();
 
             if (!orderData.success) {
-                alert('Server error. Could not create order.');
+                console.error('Create Order Error:', orderData);
+                alert(`Server error: ${orderData.message || 'Could not create order.'}`);
                 setIsSubmitting(false);
                 return;
             }
@@ -471,8 +472,8 @@ const Consultation = () => {
             paymentObject.open();
 
         } catch (error) {
-            console.error(error);
-            alert('Payment flow failed.');
+            console.error('Payment Error:', error);
+            alert(`Payment flow failed: ${error.message}`);
             setIsSubmitting(false);
         }
     };
@@ -564,11 +565,12 @@ const Consultation = () => {
             if (data.success) {
                 setStep(4);
             } else {
-                alert(data.message || 'Booking verification failed.');
+                alert(`Booking verification failed: ${data.message}`);
+                console.error('Verification failed details:', data);
             }
         } catch (error) {
-            console.error(error);
-            alert('Verification error. Please contact support.');
+            console.error('Verification error:', error);
+            alert(`Verification error: ${error.message || 'Unknown error'}. Please contact support.`);
         } finally {
             setIsSubmitting(false);
         }
