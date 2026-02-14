@@ -23,4 +23,8 @@ export default defineConfig({
     },
     chunkSizeWarningLimit: 1000,
   },
+  server: {
+    port: 5173,
+    host: true, // Listen on all addresses (optional, but good for testing on mobile via LAN)
+  },
 })

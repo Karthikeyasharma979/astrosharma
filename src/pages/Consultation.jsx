@@ -2,14 +2,14 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
 // import ReCAPTCHA from "react-google-recaptcha";
-import Tesseract from 'tesseract.js';
+// import Tesseract from 'tesseract.js';
 import Spotlight from '../components/ui/Spotlight';
-import qrCodeImg from '../assets/QRSharma.jpeg';
+// import qrCodeImg from '../assets/QRSharma.jpeg';
 import { useTheme } from '../context/ThemeContext';
 import {
     MessageSquare, BarChart3, ArrowRight, Sparkles, Send, Calendar, User,
     Phone, Mail, HelpCircle, ShoppingCart, MessageCircle, CheckCircle,
-    QrCode, Copy, Upload, ScanLine, Loader2, Sparkle, Check, Users,
+    Loader2, Sparkle, Check, Users,
     Clock, MapPin, Plus, Trash2, Info
 } from 'lucide-react';
 import { cn } from '../lib/utils';
@@ -52,16 +52,15 @@ const Consultation = () => {
     const [selectedType, setSelectedType] = useState(null);
     const [step, setStep] = useState(1);
     const [language, setLanguage] = useState('te');
-    const [utrNumber, setUtrNumber] = useState('');
-    const [screenshot, setScreenshot] = useState(null);
-    // const [captchaToken, setCaptchaToken] = useState(null);
+    // const [utrNumber, setUtrNumber] = useState('');
+    // const [screenshot, setScreenshot] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isExtracting, setIsExtracting] = useState(false);
-    const [extractionError, setExtractionError] = useState('');
+    // const [isExtracting, setIsExtracting] = useState(false);
+    // const [extractionError, setExtractionError] = useState('');
     const [termsAccepted, setTermsAccepted] = useState(false);
 
-    const [paymentConfig, setPaymentConfig] = useState(null);
-    const [copied, setCopied] = useState(false);
+    // const [paymentConfig, setPaymentConfig] = useState(null);
+    // const [copied, setCopied] = useState(false);
 
 
     // ... (keep formData state) ... 
@@ -142,25 +141,23 @@ const Consultation = () => {
             title: "Divine Consultation",
             subtitle: "Seek guidance from the stars",
             steps: ["Select Service", "Your Details", "Payment", "Confirmation"],
+            turnaround: "Answer will be given within 24 hours",
 
-            deepTitle: "Deep Analysis",
+            deepTitle: "Horoscope Report",
             deepSubtitle: "Full Birth Chart",
-            deepDesc: "Get a comprehensive analysis of your horoscope ( Dasa , anthar dasha maximum 15 Years)",
-            deepPrice: "₹1501",
+            deepDesc: "Calculation report for 2 years. Forecast for 1 year",
+            deepPrice: "₹700",
 
             kundaliTitle: "Prashna Kundali",
             kundaliSubtitle: "One Specific Question",
             kundaliDesc: "Get an answer for your specific question like Roshan health marriage business etc",
-            kundaliPrice: "₹301",
+            kundaliPrice: "₹101",
 
-            yesNoTitle: "Prashna Kundali (Yes / No)",
-            yesNoSubtitle: "Quick Answer",
-            yesNoDesc: "Get a simple Yes or No answer to your specific question.",
-            yesNoPrice: "₹101",
+
 
             matchTitle: "Marriage Matching",
             matchSubtitle: "Compatibility Check",
-            matchDesc: "Detailed analysis of horoscope compatibility for marriage. (You can add at most 2 details)",
+            matchDesc: "Detailed analysis of horoscope compatibility for marriage As per Star based ASHTAVARGA KUTAMI. (You can add at most 2 details)",
             matchPrice: "₹201",
 
             muhurthamTitle: "Muhurtham",
@@ -218,25 +215,23 @@ const Consultation = () => {
             title: "దైవ సంకల్పం",
             subtitle: "గ్రహాల నుండి మార్గదర్శకత్వం పొందండి",
             steps: ["సేవను ఎంచుకోండి", "మీ వివరాలు", "చెల్లింపు", "నిర్ధారణ"],
+            turnaround: "మీకు సమాధానం 24 గంటల లోపల ఇవ్వబడును",
 
-            deepTitle: "జాతక విశ్లేషణ",
+            deepTitle: "జాతక నివేదిక",
             deepSubtitle: "పూర్తి జాతక చక్రం",
-            deepDesc: "మీ జాతకం పూర్తి వివరాలతో (దశ, అంతర్దశ, రాబోవు 15 సంవత్సరాల ఫలితాలు).",
-            deepPrice: "₹1501",
+            deepDesc: "2 సంవత్సరాల గణన నివేదిక. 1 సంవత్సరం అంచనా.",
+            deepPrice: "₹700",
 
             kundaliTitle: "ప్రశ్న కుండలి",
-            kundaliSubtitle: "ఒక ప్రశ్న",
+            kundaliSubtitle: "ఒక నిర్దిష్ట ప్రశ్న",
             kundaliDesc: "మీ వృత్తి, ఆరోగ్యం, వివాహం, వ్యాపారం వంటి నిర్దిష్ట ప్రశ్నకు సమాధానం.",
-            kundaliPrice: "₹301",
+            kundaliPrice: "₹101",
 
-            yesNoTitle: "ప్రశ్న కుండలి (అవును / కాదు)",
-            yesNoSubtitle: "త్వరిత సమాధానం",
-            yesNoDesc: "మీ ప్రశ్నకు 'అవును' లేదా 'కాదు' అని సమాధానం పొందేందుకు.",
-            yesNoPrice: "₹101",
+
 
             matchTitle: "వివాహ పొంతన",
             matchSubtitle: "వధూవరుల పొంతన",
-            matchDesc: "మీ అమ్మాయి లేదా అబ్బాయి యొక్క వివాహ పొంతన కొరకు. (గరిష్టంగా 2 వివరాలు జోడించవచ్చు)",
+            matchDesc: "మీ అమ్మాయి లేదా అబ్బాయి యొక్క వివాహ పొంతన కొరకు నక్షత్ర రీత్యా అష్టవర్గ కూటమి ప్రకారం. (గరిష్టంగా 2 వివరాలు జోడించవచ్చు)",
             matchPrice: "₹201",
 
             muhurthamTitle: "ఇతర ముహూర్తాలకు",
@@ -295,15 +290,7 @@ const Consultation = () => {
     const t = translations[language];
 
     const consultationTypes = [
-        {
-            id: 'yesNo',
-            title: t.yesNoTitle,
-            subtitle: t.yesNoSubtitle,
-            desc: t.yesNoDesc,
-            price: t.yesNoPrice,
-            icon: HelpCircle,
-            color: 'indigo'
-        },
+
         {
             id: 'kundali',
             title: t.kundaliTitle,
@@ -396,8 +383,14 @@ const Consultation = () => {
             if (selectedType === 'deep' && !formData.birthPlace) newErrors.birthPlace = req;
         }
 
-        if ((selectedType === 'kundali' || selectedType === 'muhurtham' || selectedType === 'marriageMuhurtham' || selectedType === 'yesNo') && !formData.question) {
+        if ((selectedType === 'kundali' || selectedType === 'muhurtham' || selectedType === 'marriageMuhurtham') && !formData.question) {
             newErrors.question = req;
+        }
+
+        if ((selectedType === 'muhurtham' || selectedType === 'marriageMuhurtham') && formData.startDate && formData.endDate) {
+            if (formData.startDate > formData.endDate) {
+                newErrors.endDate = language === 'te' ? "ప్రారంభ తేదీ ముగింపు తేదీ కంటే ముందు ఉండాలి" : "Start Date must be before End Date";
+            }
         }
 
 
@@ -406,127 +399,176 @@ const Consultation = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleScreenshotChange = async (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
+    const loadRazorpay = () => {
+        return new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.body.appendChild(script);
+        });
+    };
 
-        // Reset input value to allow re-selection of the same file
-        e.target.value = '';
-
-        setScreenshot(file);
-        setIsExtracting(true);
-        setExtractionError('');
-
+    const handlePayment = async () => {
+        setIsSubmitting(true);
         try {
-            const result = await Tesseract.recognize(file, 'eng');
-            const text = result.data.text;
-            // Match 12-digit numeric UTR OR alphanumeric Transaction ID (e.g., T260118...)
-            const utrMatch = text.match(/\b\d{12}\b/) || text.match(/\bT\d{15,25}\b/);
-
-            if (utrMatch) {
-                setUtrNumber(utrMatch[0]);
-            } else {
-                setExtractionError("Could not auto-detect UTR. Please enter manually.");
+            const res = await loadRazorpay();
+            if (!res) {
+                alert('Razorpay SDK failed to load. Are you online?');
+                setIsSubmitting(false);
+                return;
             }
-        } catch (err) {
-            console.error(err);
-            setExtractionError("Failed to process image.");
-        } finally {
-            setIsExtracting(false);
+
+            // 1. Create Order
+            const typeInfo = consultationTypes.find(t => t.id === selectedType);
+            const amountStr = typeInfo?.price?.replace(/[^0-9]/g, '') || '1'; // Default to 1 if parsing fails, but should safeguard
+
+            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+            const orderRes = await fetch(`${apiUrl}/api/create-order`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount: amountStr })
+            });
+            const orderData = await orderRes.json();
+
+            if (!orderData.success) {
+                alert('Server error. Could not create order.');
+                setIsSubmitting(false);
+                return;
+            }
+
+            const { order } = orderData;
+
+            // 2. Initialize Razorpay
+            const options = {
+                key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'YOUR_KEY_ID', // Replace with valid key if not in env
+                amount: order.amount,
+                currency: order.currency,
+                name: "AstroSharma",
+                description: typeInfo?.title,
+                image: "https://astrosharma.vercel.app/logo_icon.jpg", // Use absolute URL if possible
+                order_id: order.id,
+                handler: async function (response) {
+                    // 3. Verify Payment & Book
+                    // alert(response.razorpay_payment_id);
+                    // alert(response.razorpay_order_id);
+                    // alert(response.razorpay_signature);
+
+                    await handleVerifyAndBook(response);
+                },
+                prefill: {
+                    name: formData.fullName,
+                    email: formData.email,
+                    contact: formData.phone
+                },
+                theme: {
+                    color: "#f97316"
+                }
+            };
+
+            const paymentObject = new window.Razorpay(options);
+            paymentObject.open();
+
+        } catch (error) {
+            console.error(error);
+            alert('Payment flow failed.');
+            setIsSubmitting(false);
         }
     };
 
-    const handleCompleteBooking = async () => {
-        if (!utrNumber) {
-            setExtractionError("Please enter Transaction ID");
-            return;
-        }
-
-        // if (!captchaToken) {
-        //     setExtractionError("Please complete the CAPTCHA check below");
-        //     return;
-        // }
-
-        setIsSubmitting(true);
+    const handleVerifyAndBook = async (paymentResponse) => {
         try {
-            const formDataToSend = new FormData();
-            // Append data based on type
+            // Use JSON payload to ensure consistent data structure
             const typeInfo = consultationTypes.find(t => t.id === selectedType);
 
-            formDataToSend.append('consultationType', typeInfo?.title);
-            formDataToSend.append('price', typeInfo?.price);
-            formDataToSend.append('phone', formData.phone);
-            formDataToSend.append('email', formData.email);
-            formDataToSend.append('utrNumber', utrNumber);
-            // formDataToSend.append('captchaToken', captchaToken);
-            if (screenshot) formDataToSend.append('screenshot', screenshot);
+            const payload = {
+                consultationType: typeInfo?.title,
+                price: typeInfo?.price,
+                phone: formData.phone,
+                email: formData.email,
 
+                // Razorpay Fields
+                razorpay_payment_id: paymentResponse.razorpay_payment_id,
+                razorpay_order_id: paymentResponse.razorpay_order_id,
+                razorpay_signature: paymentResponse.razorpay_signature,
+            };
+
+            // Add fields based on selection
             if (selectedType === 'match' || selectedType === 'marriageMuhurtham') {
-                // Send granular details for Bride
-                formDataToSend.append('fullName', formData.fullName);
-                formDataToSend.append('girlName', formData.girlName);
-                formDataToSend.append('girlDob', formData.girlDob);
-                formDataToSend.append('girlTime', formData.girlTime);
-                formDataToSend.append('girlPlace', formData.girlPlace);
-                formDataToSend.append('girlPincode', formData.girlPincode);
-
-                // Send granular details for Groom
-                formDataToSend.append('boyName', formData.boyName);
-                formDataToSend.append('boyDob', formData.boyDob);
-                formDataToSend.append('boyTime', formData.boyTime);
-                formDataToSend.append('boyPlace', formData.boyPlace);
-                formDataToSend.append('boyPincode', formData.boyPincode);
+                Object.assign(payload, {
+                    fullName: formData.fullName,
+                    girlName: formData.girlName,
+                    girlDob: formData.girlDob,
+                    girlTime: formData.girlTime,
+                    girlPlace: formData.girlPlace,
+                    girlPincode: formData.girlPincode,
+                    boyName: formData.boyName,
+                    boyDob: formData.boyDob,
+                    boyTime: formData.boyTime,
+                    boyPlace: formData.boyPlace,
+                    boyPincode: formData.boyPincode
+                });
 
                 if (extraPersonType === 'bride') {
-                    formDataToSend.append('girl2Name', formData.girl2Name);
-                    formDataToSend.append('girl2Dob', formData.girl2Dob);
-                    formDataToSend.append('girl2Time', formData.girl2Time);
-                    formDataToSend.append('girl2Place', formData.girl2Place);
-                    formDataToSend.append('girl2Pincode', formData.girl2Pincode);
+                    Object.assign(payload, {
+                        girl2Name: formData.girl2Name,
+                        girl2Dob: formData.girl2Dob,
+                        girl2Time: formData.girl2Time,
+                        girl2Place: formData.girl2Place,
+                        girl2Pincode: formData.girl2Pincode
+                    });
                 }
                 if (extraPersonType === 'groom') {
-                    formDataToSend.append('boy2Name', formData.boy2Name);
-                    formDataToSend.append('boy2Dob', formData.boy2Dob);
-                    formDataToSend.append('boy2Time', formData.boy2Time);
-                    formDataToSend.append('boy2Place', formData.boy2Place);
-                    formDataToSend.append('boy2Pincode', formData.boy2Pincode);
+                    Object.assign(payload, {
+                        boy2Name: formData.boy2Name,
+                        boy2Dob: formData.boy2Dob,
+                        boy2Time: formData.boy2Time,
+                        boy2Place: formData.boy2Place,
+                        boy2Pincode: formData.boy2Pincode
+                    });
                 }
 
                 if (selectedType === 'marriageMuhurtham') {
-                    formDataToSend.append('startDate', formData.startDate);
-                    formDataToSend.append('endDate', formData.endDate);
-                    formDataToSend.append('muhurthamLocation', formData.muhurthamLocation);
+                    payload.startDate = formData.startDate;
+                    payload.endDate = formData.endDate;
+                    payload.muhurthamLocation = formData.muhurthamLocation;
                 }
             } else {
-                formDataToSend.append('fullName', formData.fullName);
-                formDataToSend.append('dob', formData.dob);
-                formDataToSend.append('birthTime', formData.birthTime);
-                formDataToSend.append('birthPlace', formData.birthPlace);
-                formDataToSend.append('pincode', formData.pincode);
-                formDataToSend.append('question', formData.question);
+                Object.assign(payload, {
+                    fullName: formData.fullName,
+                    dob: formData.dob,
+                    birthTime: formData.birthTime,
+                    birthPlace: formData.birthPlace,
+                    pincode: formData.pincode,
+                    question: formData.question
+                });
                 if (selectedType === 'muhurtham') {
-                    formDataToSend.append('startDate', formData.startDate);
-                    formDataToSend.append('endDate', formData.endDate);
-                    formDataToSend.append('muhurthamLocation', formData.muhurthamLocation);
+                    payload.startDate = formData.startDate;
+                    payload.endDate = formData.endDate;
+                    payload.muhurthamLocation = formData.muhurthamLocation;
                 }
             }
 
             const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
             const response = await fetch(`${apiUrl}/api/book-consultation`, {
                 method: 'POST',
-                body: formDataToSend
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
             });
 
             const data = await response.json();
             if (data.success) {
                 setStep(4);
             } else {
-                const errorMessage = data.errors ? data.errors.join('\n') : (data.message || 'Booking failed. Please try again.');
-                alert(errorMessage);
+                alert(data.message || 'Booking verification failed.');
             }
         } catch (error) {
             console.error(error);
-            alert('Network error. Please try again.');
+            alert('Verification error. Please contact support.');
         } finally {
             setIsSubmitting(false);
         }
@@ -607,14 +649,21 @@ const Consultation = () => {
                                                 )}
                                             </div>
 
-                                            <h3 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-2 leading-tight">
+                                            <h3 className="text-xl font-serif font-bold text-gray-900 dark:text-white mb-1 leading-tight">
                                                 {type.title}
                                             </h3>
+                                            <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">
+                                                {type.subtitle}
+                                            </p>
                                             <p className="text-xs font-bold uppercase tracking-wider text-orange-600 dark:text-orange-400 mb-4">
                                                 {type.price}
                                             </p>
                                             <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed mb-8 flex-grow">
                                                 {type.desc}
+                                            </p>
+
+                                            <p className="text-xs font-bold text-orange-700 dark:text-yellow-300 mb-6 bg-orange-100 dark:bg-yellow-500/10 px-3 py-1 rounded-full inline-block border border-orange-200 dark:border-yellow-500/30 shadow-sm">
+                                                {t.turnaround}
                                             </p>
 
                                             <div className="flex items-center gap-2 text-sm font-bold text-gray-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
@@ -659,6 +708,13 @@ const Consultation = () => {
                                     </div>
 
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                        {/* Sacred Instruction */}
+                                        <div className="md:col-span-2 text-center mb-6">
+                                            <p className="text-lg font-medium text-temple-saffron dark:text-orange-300 font-telugu">
+                                                మీ ఇష్ట దైవమును మనసులో స్మరించుకొని ప్రశ్న అడగడం ప్రారంభించండి
+                                            </p>
+                                        </div>
+
                                         {(selectedType === 'match' || selectedType === 'marriageMuhurtham') ? (
                                             <>
                                                 {/* Contact Person Name */}
@@ -768,12 +824,42 @@ const Consultation = () => {
                                         ) : (
                                             <>
                                                 <InputField label={`${t.labels.name} *`} name="fullName" value={formData.fullName} onChange={handleInputChange} error={errors.fullName} icon={User} fullWidth />
-                                                {selectedType !== 'kundali' && selectedType !== 'marriageMuhurtham' && selectedType !== 'yesNo' && (
+                                                {selectedType !== 'marriageMuhurtham' && selectedType !== 'yesNo' && (
                                                     <>
-                                                        <InputField label={`${t.labels.dob} *`} name="dob" type="date" value={formData.dob} onChange={handleInputChange} error={errors.dob} icon={Calendar} />
-                                                        <InputField label={`${t.labels.time} *`} name="birthTime" type="time" value={formData.birthTime} onChange={handleInputChange} error={errors.birthTime} icon={Clock} />
-                                                        <InputField label={`${t.labels.place} *`} name="birthPlace" value={formData.birthPlace} onChange={handleInputChange} error={errors.birthPlace} icon={MapPin} />
-                                                        <InputField label={t.labels.pincode} name="pincode" value={formData.pincode} onChange={handleInputChange} error={errors.pincode} icon={MapPin} />
+                                                        <InputField
+                                                            label={`${t.labels.dob} ${selectedType === 'deep' ? '*' : '(Optional)'}`}
+                                                            name="dob"
+                                                            type="date"
+                                                            value={formData.dob}
+                                                            onChange={handleInputChange}
+                                                            error={errors.dob}
+                                                            icon={Calendar}
+                                                        />
+                                                        <InputField
+                                                            label={`${t.labels.time} ${selectedType === 'deep' ? '*' : '(Optional)'}`}
+                                                            name="birthTime"
+                                                            type="time"
+                                                            value={formData.birthTime}
+                                                            onChange={handleInputChange}
+                                                            error={errors.birthTime}
+                                                            icon={Clock}
+                                                        />
+                                                        <InputField
+                                                            label={`${t.labels.place} ${selectedType === 'deep' ? '*' : '(Optional)'}`}
+                                                            name="birthPlace"
+                                                            value={formData.birthPlace}
+                                                            onChange={handleInputChange}
+                                                            error={errors.birthPlace}
+                                                            icon={MapPin}
+                                                        />
+                                                        <InputField
+                                                            label={`${t.labels.pincode} ${selectedType === 'deep' ? '*' : '(Optional)'}`}
+                                                            name="pincode"
+                                                            value={formData.pincode}
+                                                            onChange={handleInputChange}
+                                                            error={errors.pincode}
+                                                            icon={MapPin}
+                                                        />
                                                     </>
                                                 )}
                                             </>
@@ -843,7 +929,7 @@ const Consultation = () => {
                                                 rel="noopener noreferrer"
                                                 className="font-bold text-orange-600 underline underline-offset-2 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300"
                                             >
-                                                Terms & Disclaimer
+                                                Terms and conditions & Disclaimer
                                             </Link>
                                         </label>
                                     </div>
@@ -891,119 +977,25 @@ const Consultation = () => {
                                     <h2 className="text-2xl font-serif font-bold text-gray-900 dark:text-white mb-2">{t.payTitle}</h2>
                                     <p className="text-gray-500 text-sm mb-8">{t.payDesc}</p>
 
-                                    <div className="bg-white p-4 rounded-xl shadow-inner border border-gray-200 inline-block mb-6 relative group">
-                                        <div className="absolute -inset-1 bg-gradient-to-br from-orange-400 to-red-600 rounded-2xl opacity-20 group-hover:opacity-40 transition-opacity blur-sm" />
-                                        <div className="relative bg-white p-2 rounded-lg">
-                                            <img src={qrCodeImg} alt="Payment QR Code" className="w-40 h-40 object-contain" />
+                                    <div className="bg-orange-50 dark:bg-orange-900/20 p-6 rounded-xl mb-8 border border-orange-100 dark:border-orange-800/50">
+                                        <div className="flex items-center justify-between mb-2">
+                                            <span className="text-sm font-bold text-gray-600 dark:text-gray-300">Total Amount:</span>
+                                            <span className="text-3xl font-extrabold text-orange-600 dark:text-orange-400">
+                                                {consultationTypes.find(c => c.id === selectedType)?.price}
+                                            </span>
                                         </div>
-                                    </div>
-
-                                    {/* UPI ID Display */}
-                                    <div className="mb-8 flex flex-col items-center gap-2">
-                                        <span className="text-xs font-bold uppercase tracking-widest text-gray-500">UPI ID</span>
-                                        <div className="relative">
-                                            <button
-                                                onClick={() => {
-                                                    navigator.clipboard.writeText(paymentConfig?.upiId || 'astrosharma74@ptyes');
-                                                    setCopied(true);
-                                                    setTimeout(() => setCopied(false), 2000);
-                                                }}
-                                                className="flex items-center gap-3 bg-white dark:bg-slate-800 px-5 py-2 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-orange-500 transition-colors group active:scale-95 shadow-sm"
-                                            >
-                                                <span className="font-mono text-lg font-bold text-gray-800 dark:text-gray-200 tracking-wide">
-                                                    {paymentConfig?.upiId || 'astrosharma74@ptyes'}
-                                                </span>
-                                                {copied ? (
-                                                    <Check className="w-4 h-4 text-green-500" />
-                                                ) : (
-                                                    <Copy className="w-4 h-4 text-orange-500 group-hover:scale-110 transition-transform" />
-                                                )}
-                                            </button>
-                                            <AnimatePresence>
-                                                {copied && (
-                                                    <motion.div
-                                                        initial={{ opacity: 0, y: 10 }}
-                                                        animate={{ opacity: 1, y: 0 }}
-                                                        exit={{ opacity: 0 }}
-                                                        className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs font-bold text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/30 px-2 py-1 rounded-md whitespace-nowrap"
-                                                    >
-                                                        Copied!
-                                                    </motion.div>
-                                                )}
-                                            </AnimatePresence>
-                                        </div>
-                                    </div>
-
-                                    <div className="bg-orange-50 dark:bg-orange-900/20 p-4 rounded-xl mb-8 flex items-center justify-between border border-orange-100 dark:border-orange-800/50">
-                                        <span className="text-sm font-bold text-gray-600 dark:text-gray-300">Amount to pay:</span>
-                                        <span className="text-2xl font-bold text-orange-600 dark:text-orange-400">
-                                            {consultationTypes.find(c => c.id === selectedType)?.price}
-                                        </span>
-                                    </div>
-
-                                    <div className="space-y-4 text-left">
-                                        <div className="space-y-2">
-                                            <label className="text-xs font-bold uppercase tracking-widest text-gray-500 ml-1">
-                                                {t.labels.utr}
-                                            </label>
-                                            <input
-                                                type="text"
-                                                value={utrNumber}
-                                                onChange={(e) => setUtrNumber(e.target.value)}
-                                                placeholder="Enter UTR or Transaction ID"
-                                                disabled={isSubmitting}
-                                                className="w-full bg-gray-50 dark:bg-black/20 border-2 border-gray-200 dark:border-white/10 rounded-xl px-4 py-3 text-gray-900 dark:text-white outline-none focus:border-orange-500 uppercase tracking-widest font-mono disabled:opacity-50 disabled:cursor-not-allowed"
-                                            />
-                                        </div>
-
-                                        <div className="relative">
-                                            <input
-                                                type="file"
-                                                id="screenshot"
-                                                accept="image/*"
-                                                onChange={handleScreenshotChange}
-                                                disabled={isSubmitting}
-                                                className="hidden"
-                                            />
-                                            <label
-                                                htmlFor="screenshot"
-                                                className={`block w-full border-2 border-dashed border-gray-300 dark:border-white/20 rounded-xl p-4 text-center cursor-pointer hover:border-orange-500 transition-colors ${isSubmitting ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''}`}
-                                            >
-                                                {isExtracting ? (
-                                                    <div className="flex items-center justify-center gap-2 text-orange-500">
-                                                        <Loader2 className="w-4 h-4 animate-spin" />
-                                                        <span className="text-sm font-bold">Scanning...</span>
-                                                    </div>
-                                                ) : (
-                                                    <div className="flex items-center justify-center gap-2 text-gray-500 dark:text-gray-400">
-                                                        <Upload className="w-4 h-4" />
-                                                        <span className="text-sm font-bold">Upload Screenshot</span>
-                                                    </div>
-                                                )}
-                                            </label>
-                                        </div>
-                                        {extractionError && <p className="text-xs text-red-500 text-center">{extractionError}</p>}
-
-                                        {/* reCAPTCHA - REMOVED */}
-                                        {/*
-                                        <div className="flex justify-center pt-4">
-                                            <ReCAPTCHA
-                                                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                                                onChange={(token) => setCaptchaToken(token)}
-                                                onExpired={() => setCaptchaToken(null)}
-                                                theme={isDark ? 'dark' : 'light'}
-                                            />
-                                        </div>
-                                        */}
+                                        <p className="text-xs text-gray-400 mt-2 border-t border-gray-200 dark:border-white/10 pt-2">
+                                            Includes secure payment processing via Razorpay
+                                        </p>
                                     </div>
 
                                     <button
-                                        onClick={handleCompleteBooking}
+                                        onClick={handlePayment}
                                         disabled={isSubmitting}
-                                        className="w-full mt-8 bg-black dark:bg-white text-white dark:text-black font-bold py-4 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
+                                        className="w-full bg-black dark:bg-white text-white dark:text-black font-bold py-4 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
                                     >
-                                        {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <CheckCircle className="w-5 h-5" />}
-                                        {isSubmitting ? "Processing..." : "Complete Booking"}
+                                        {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Sparkles className="w-5 h-5" />}
+                                        {isSubmitting ? "Processing Payment..." : "Pay Now"}
                                     </button>
                                 </div>
                             </motion.div>

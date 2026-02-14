@@ -1,19 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Noto+Serif+Telugu:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-gray-50 dark:bg-astro-dark text-gray-900 dark:text-astro-text overflow-x-hidden transition-colors duration-300;
+    @apply bg-temple-cream dark:bg-midnight text-temple-text dark:text-gray-100 overflow-x-hidden transition-colors duration-500;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif text-temple-navy dark:text-temple-cream;
   }
 }
 
-.glass-card {
-  @apply bg-white/80 dark:bg-astro-card backdrop-blur-md border border-gray-200 dark:border-white/10 shadow-xl;
+/* Clean Card Style */
+.card-clean {
+  @apply bg-white dark:bg-white/5 rounded-[2rem] shadow-[0_8px_30px_#0000000a] dark:shadow-none hover:shadow-[0_20px_40px_#f973161a] transition-all duration-500 border border-transparent hover:border-temple-saffron/10 dark:hover:border-temple-gold/20 backdrop-blur-sm;
 }
 
-.text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-orange-600 via-orange-500 to-red-600 dark:from-orange-400 dark:via-orange-200 dark:to-red-500;
+/* Glass Temple Style */
+.glass-temple {
+  @apply bg-white/30 dark:bg-black/30 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-2xl shadow-lg;
+}
+
+/* Orbit Ring */
+.orbit-ring {
+  @apply absolute border border-temple-gold/20 rounded-full;
+  box-shadow: 0 0 40px rgba(212, 175, 55, 0.05);
+}
+
+/* Text Gradients */
+.text-gradient-saffron {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-temple-saffron to-temple-saffron-dark;
+}
+
+/* Mandala Background Pattern */
+.mandala-bg {
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4AF37' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Legacy Support */
+.noise-overlay {
+  @apply hidden;
+  /* Disable noise for clearer temple look */
 }
 
 .star-bg {
@@ -24,4 +61,108 @@
     radial-gradient(white, rgba(255, 255, 255, .1) 2px, transparent 3px);
   background-size: 550px 550px, 350px 350px, 250px 250px;
   background-position: 0 0, 40px 60px, 130px 270px;
+  /* Muted for luxury feel */
+}
+
+/* New Hero Animations */
+/* New Hero Animations */
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-spin-reverse {
+  animation: spin-reverse 20s linear infinite;
+}
+
+.bg-conic-gradient {
+  background-image: conic-gradient(from 0deg at 50% 50%, var(--tw-gradient-stops));
+}
+
+.god-rays {
+  @apply absolute inset-0 bg-gradient-to-t from-transparent via-temple-gold/10 to-transparent blur-3xl opacity-50 animate-pulse-slow;
+  transform-origin: bottom center;
+}
+
+@keyframes scroll-vertical {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-scroll-vertical {
+  animation: scroll-vertical 20s linear infinite;
+}
+
+/* Ethereal Design Animations */
+@keyframes fog-flow {
+  0% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateX(20%);
+    opacity: 0;
+  }
+}
+
+.animate-fog {
+  animation: fog-flow 20s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* Stitch Design Elements */
+.deity-circle {
+  position: relative;
+}
+
+.deity-circle::before {
+  content: '';
+  position: absolute;
+  inset: -15px;
+  /* Size of the glow ring */
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+  z-index: -1;
+}
+
+.progress-bar-bg {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.bg-stitch-gradient {
+  background: radial-gradient(circle at top right, #0d1b33 0%, #050c19 60%);
 }

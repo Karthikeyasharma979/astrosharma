@@ -21,7 +21,7 @@ const Terms = () => {
                             <Info className="w-8 h-8 text-orange-600 dark:text-orange-400" />
                         </div>
                         <h1 className="text-3xl font-serif font-bold text-gray-900 dark:text-white">
-                            Terms & Disclaimer
+                            Terms and conditions & Disclaimer
                         </h1>
                     </div>
 
@@ -43,7 +43,7 @@ const Terms = () => {
                                     </li>
                                     <li className="flex gap-3">
                                         <span className="text-orange-500 font-bold mt-1">•</span>
-                                        <span><strong>Delivery Timelines:</strong> All stated delivery times are estimates provided in good faith. Actual delivery may vary contingent upon the complexity of the astrological analysis required.</span>
+                                        <span><strong>Delivery Timelines:</strong> All stated delivery times are estimates provided in good faith. We aim to answer all queries within 24 hours. However, actual delivery may vary contingent upon the complexity of the astrological analysis required.</span>
                                     </li>
                                 </ul>
                             </div>

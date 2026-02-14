@@ -1,12 +1,12 @@
 import React from 'react';
 import { Hero } from '../components/Hero';
-import { RotatingSwastik } from '../components/RotatingSwastik';
+
 
 const Home = () => {
     return (
-        <div className="relative">
+        <div className="min-h-screen">
             <Hero />
-            <RotatingSwastik />
+
         </div>
     );
 };

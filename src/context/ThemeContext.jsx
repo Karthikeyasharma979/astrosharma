@@ -10,7 +10,7 @@ export const ThemeProvider = ({ children }) => {
                 return storedPrefs;
             }
         }
-        return 'light'; // Default to light mode
+        return 'dark'; // Default to dark mode
     });
 
     useEffect(() => {
