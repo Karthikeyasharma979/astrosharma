@@ -125,6 +125,18 @@ const Consultation = () => {
         fetchPaymentConfig();
     }, []);
 
+    React.useEffect(() => {
+        const handleBeforeUnload = (e) => {
+            if (isSubmitting) {
+                e.preventDefault();
+                e.returnValue = ''; // Setting returnValue triggers the browser's default warning dialog
+            }
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+    }, [isSubmitting]);
+
     // ... (keep translations) ...
     // ... (omitting translations for brevity in tool call, will rely on matching) ...
 
