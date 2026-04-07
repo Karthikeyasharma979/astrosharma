@@ -948,6 +948,16 @@ const Consultation = () => {
                                         </label>
                                     </div>
 
+                                    {/* Please Wait Warning */}
+                                    <div className="mt-6 p-3 rounded-xl bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-500/30 flex items-start gap-3">
+                                        <Info className="w-5 h-5 text-orange-600 dark:text-orange-400 shrink-0 mt-0.5" />
+                                        <p className="text-xs font-bold text-orange-800 dark:text-orange-200 text-left">
+                                            {language === 'en'
+                                                ? "Important: Please do not close the window or go back during the payment process until you receive a confirmation message and email from us."
+                                                : "ముఖ్య గమనిక: దయచేసి మీరు మా నుండి బుకింగ్ కన్ఫర్మేషన్ పేజీ మరియు ఈమెయిల్ పొందే వరకు వెనక్కి వెళ్ళకండి లేదా పేజీని క్లోజ్ చేయకండి."}
+                                        </p>
+                                    </div>
+
                                     <button
                                         onClick={() => {
                                             if (validateForm() && termsAccepted) setStep(3);
@@ -1045,6 +1055,28 @@ const Consultation = () => {
                     </AnimatePresence>
                 </div>
             </div>
+
+            {/* Full Screen Overlay during submission */}
+            <AnimatePresence>
+                {isSubmitting && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm"
+                    >
+                        <div className="bg-white/10 dark:bg-black/50 p-8 rounded-3xl border border-white/20 shadow-2xl flex flex-col items-center max-w-sm text-center transform scale-105">
+                            <Loader2 className="w-16 h-16 text-orange-500 animate-spin mb-6 drop-shadow-lg" />
+                            <h3 className="text-2xl font-bold text-white mb-3 tracking-wide">
+                                {language === 'en' ? 'Transaction in Progress' : 'చెల్లింపు జరుగుతోంది'}
+                            </h3>
+                            <p className="text-gray-200 text-sm leading-relaxed">
+                                {language === 'en' ? 'Please do not close the browser or refresh the page until the transaction is completed.' : 'లావాదేవీ పూర్తయ్యే వరకు దయచేసి ముగించకండి లేదా రీఫ్రెష్ చేయకండి.'}
+                            </p>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
         </div>
     );
 };
