@@ -59,8 +59,8 @@ const Consultation = () => {
     // const [extractionError, setExtractionError] = useState('');
     const [termsAccepted, setTermsAccepted] = useState(false);
 
-    // const [paymentConfig, setPaymentConfig] = useState(null);
-    // const [copied, setCopied] = useState(false);
+    const [paymentConfig, setPaymentConfig] = useState(null);
+    const [copied, setCopied] = useState(false);
 
 
     // ... (keep formData state) ... 
