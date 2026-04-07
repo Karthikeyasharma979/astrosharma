@@ -68,19 +68,6 @@ function AnimatedRoutes() {
 function App() {
 
 
-    React.useEffect(() => {
-        const handleContextMenu = (e) => {
-            e.preventDefault();
-        };
-
-        window.addEventListener('contextmenu', handleContextMenu);
-
-        // Cleanup
-        return () => {
-            window.removeEventListener('contextmenu', handleContextMenu);
-        };
-    }, []);
-
     return (
         <Router>
             <ScrollToTop />

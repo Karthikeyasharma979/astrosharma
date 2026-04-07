@@ -113,7 +113,7 @@ const Consultation = () => {
     React.useEffect(() => {
         const fetchPaymentConfig = async () => {
             try {
-                const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+                const apiUrl = import.meta.env.VITE_API_URL || '';
                 const response = await fetch(`${apiUrl}/api/payment-config`);
                 const data = await response.json();
                 setPaymentConfig(data);
@@ -435,7 +435,7 @@ const Consultation = () => {
             const typeInfo = consultationTypes.find(t => t.id === selectedType);
             const amountStr = typeInfo?.price?.replace(/[^0-9]/g, '') || '1'; // Default to 1 if parsing fails, but should safeguard
 
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            const apiUrl = import.meta.env.VITE_API_URL || '';
 
             const orderRes = await fetch(`${apiUrl}/api/create-order`, {
                 method: 'POST',
@@ -563,7 +563,7 @@ const Consultation = () => {
                 }
             }
 
-            const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+            const apiUrl = import.meta.env.VITE_API_URL || '';
 
             const response = await fetch(`${apiUrl}/api/book-consultation`, {
                 method: 'POST',
