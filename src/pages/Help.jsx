@@ -61,6 +61,7 @@ const Help = () => {
             const data = await response.json();
 
             if (data.success) {
+                console.log('✅ Server Confirmation:', data.message);
                 setStatus('success');
                 setFormData({ firstName: '', lastName: '', email: '', message: '' });
                 setFile(null);

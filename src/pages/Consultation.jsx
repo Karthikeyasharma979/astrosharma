@@ -575,6 +575,7 @@ const Consultation = () => {
 
             const data = await response.json();
             if (data.success) {
+                console.log('✅ Server Confirmation:', data.message);
                 setStep(4);
             } else {
                 alert(`Booking verification failed: ${data.message}`);
