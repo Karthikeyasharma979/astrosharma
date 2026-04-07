@@ -15,24 +15,37 @@ const Layout = ({ children }) => {
 
             <Navbar />
 
-            <main className="relative z-10">
+            <main className="relative z-10 w-full flex flex-col min-h-[calc(100svh-80px)]">
                 {children}
             </main>
             {/* Footer "The Void" */}
-            <footer className="relative z-10 bg-temple-navy text-white/80 border-t border-white/5 mt-0 py-12">
+            <footer className="relative z-10 bg-temple-navy text-white/80 border-t border-white/5 py-12 md:py-16">
                 <div className="container mx-auto px-6 relative z-10">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-10 md:gap-8">
 
                         {/* Brand */}
-                        <div className="flex items-center gap-2">
-                            <img src={logo} alt="Logo" className="w-8 h-8 rounded-full grayscale opacity-80 hover:grayscale-0 transition-all" />
-                            <span className="font-serif text-xl font-bold tracking-wide text-white">
-                                AstroSharma
-                            </span>
+                        <div className="flex flex-col items-center md:items-start gap-3">
+                            <div className="flex items-center gap-3">
+                                <img src={logo} alt="Logo" className="w-10 h-10 rounded-full grayscale opacity-80 hover:grayscale-0 transition-all shadow-lg" />
+                                <span className="font-serif text-2xl font-bold tracking-wider text-temple-gold">
+                                    AstroSharma
+                                </span>
+                            </div>
+                            <p className="text-sm text-white/40 max-w-[250px] text-center md:text-left mt-2 leading-relaxed">
+                                Aligning your life with cosmic wisdom and celestial precision.
+                            </p>
                         </div>
 
-                        {/* Social Icons */}
-                        <div className="flex items-center gap-6">
+                        {/* Middle: Links */}
+                        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm font-semibold tracking-wide uppercase text-white/50">
+                            <Link to="/terms" className="hover:text-temple-gold transition-colors">Terms</Link>
+                            <Link to="/privacy" className="hover:text-temple-gold transition-colors">Privacy</Link>
+                            <Link to="/refunds" className="hover:text-temple-gold transition-colors">Refunds</Link>
+                            <Link to="/contact" className="hover:text-temple-gold transition-colors">Contact</Link>
+                        </div>
+
+                        {/* Right: Social Icons */}
+                        <div className="flex items-center gap-5">
                             {[
                                 { Icon: Facebook, href: "https://facebook.com/astrosharma74" },
                                 { Icon: X, href: "https://x.com/astrosharma74" },
@@ -43,19 +56,11 @@ const Layout = ({ children }) => {
                                     href={href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-white/60 hover:text-white transition-colors"
+                                    className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all"
                                 >
                                     <Icon className="w-5 h-5" />
                                 </a>
                             ))}
-                        </div>
-
-                        {/* Links */}
-                        <div className="flex items-center gap-6 text-sm font-medium text-white/60">
-                            <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
-                            <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
-                            <Link to="/refunds" className="hover:text-white transition-colors">Refunds</Link>
-                            <Link to="/contact" className="hover:text-white transition-colors">Contact</Link>
                         </div>
                     </div>
                 </div>

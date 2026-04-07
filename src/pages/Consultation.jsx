@@ -577,6 +577,9 @@ const Consultation = () => {
             if (data.success) {
                 console.log('✅ Server Confirmation:', data.message);
                 setStep(4);
+                if (data.emailSent === false) {
+                    alert(`Payment successful, but email sending failed: ${data.emailError || 'Please contact support if you did not receive confirmation email.'}`);
+                }
             } else {
                 alert(`Booking verification failed: ${data.message}`);
                 console.error('Verification failed details:', data);
