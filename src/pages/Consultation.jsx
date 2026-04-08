@@ -61,6 +61,7 @@ const Consultation = () => {
 
     const [paymentConfig, setPaymentConfig] = useState(null);
     const [copied, setCopied] = useState(false);
+    const [bookingNotice, setBookingNotice] = useState('');
 
 
     // ... (keep formData state) ... 
@@ -576,9 +577,27 @@ const Consultation = () => {
             const data = await response.json();
             if (data.success) {
                 console.log('✅ Server Confirmation:', data.message);
-                setStep(4);
+                let notice = '';
                 if (data.emailSent === false) {
-                    alert(`Payment successful, but email sending failed: ${data.emailError || 'Please contact support if you did not receive confirmation email.'}`);
+                    notice = `Payment successful, but email sending failed: ${data.emailError || 'Please contact support if you did not receive confirmation email.'}`;
+                    console.error('Email delivery failure after successful payment', {
+                        bookingId: data.bookingId,
+                        emailError: data.emailError,
+                        response: data
+                    });
+                } else if (typeof data.emailSent === 'undefined') {
+                    notice = 'Payment successful, but email delivery status could not be confirmed from server response.';
+                    console.warn('Email delivery status missing in booking response', {
+                        bookingId: data.bookingId,
+                        response: data
+                    });
+                }
+
+                setBookingNotice(notice);
+                setStep(4);
+
+                if (notice) {
+                    alert(notice);
                 }
             } else {
                 alert(`Booking verification failed: ${data.message}`);
@@ -1047,6 +1066,11 @@ const Consultation = () => {
                                     <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
                                         {t.successDesc}
                                     </p>
+                                    {bookingNotice && (
+                                        <div className="mb-6 rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-left text-sm text-red-700">
+                                            {bookingNotice}
+                                        </div>
+                                    )}
                                     <a
                                         href="/"
                                         className="relative z-10 inline-block px-8 py-3 rounded-full bg-green-600 text-white font-bold hover:bg-green-700 transition-colors shadow-lg shadow-green-500/30 cursor-pointer"
