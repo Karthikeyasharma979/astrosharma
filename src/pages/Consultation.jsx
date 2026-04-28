@@ -508,60 +508,18 @@ const Consultation = () => {
                 razorpay_signature: paymentResponse.razorpay_signature,
             };
 
-            // Add fields based on selection
-            if (selectedType === 'match' || selectedType === 'marriageMuhurtham') {
-                Object.assign(payload, {
-                    fullName: formData.fullName,
-                    girlName: formData.girlName,
-                    girlDob: formData.girlDob,
-                    girlTime: formData.girlTime,
-                    girlPlace: formData.girlPlace,
-                    girlPincode: formData.girlPincode,
-                    boyName: formData.boyName,
-                    boyDob: formData.boyDob,
-                    boyTime: formData.boyTime,
-                    boyPlace: formData.boyPlace,
-                    boyPincode: formData.boyPincode
-                });
-
-                if (extraPersonType === 'bride') {
-                    Object.assign(payload, {
-                        girl2Name: formData.girl2Name,
-                        girl2Dob: formData.girl2Dob,
-                        girl2Time: formData.girl2Time,
-                        girl2Place: formData.girl2Place,
-                        girl2Pincode: formData.girl2Pincode
-                    });
-                }
-                if (extraPersonType === 'groom') {
-                    Object.assign(payload, {
-                        boy2Name: formData.boy2Name,
-                        boy2Dob: formData.boy2Dob,
-                        boy2Time: formData.boy2Time,
-                        boy2Place: formData.boy2Place,
-                        boy2Pincode: formData.boy2Pincode
-                    });
-                }
-
-                if (selectedType === 'marriageMuhurtham') {
-                    payload.startDate = formData.startDate;
-                    payload.endDate = formData.endDate;
-                    payload.muhurthamLocation = formData.muhurthamLocation;
-                }
-            } else {
-                Object.assign(payload, {
-                    fullName: formData.fullName,
-                    dob: formData.dob,
-                    birthTime: formData.birthTime,
-                    birthPlace: formData.birthPlace,
-                    pincode: formData.pincode,
-                    question: formData.question
-                });
-                if (selectedType === 'muhurtham') {
-                    payload.startDate = formData.startDate;
-                    payload.endDate = formData.endDate;
-                    payload.muhurthamLocation = formData.muhurthamLocation;
-                }
+            // Include all available form details to ensure nothing is missed
+            Object.assign(payload, formData);
+            
+            // Add extra person type and clean up empty secondary fields so DB is clear
+            payload.extraPersonType = extraPersonType;
+            if (extraPersonType === 'none') {
+                delete payload.girl2Name; delete payload.girl2Dob; delete payload.girl2Time; delete payload.girl2Place; delete payload.girl2Pincode;
+                delete payload.boy2Name; delete payload.boy2Dob; delete payload.boy2Time; delete payload.boy2Place; delete payload.boy2Pincode;
+            } else if (extraPersonType === 'bride') {
+                delete payload.boy2Name; delete payload.boy2Dob; delete payload.boy2Time; delete payload.boy2Place; delete payload.boy2Pincode;
+            } else if (extraPersonType === 'groom') {
+                delete payload.girl2Name; delete payload.girl2Dob; delete payload.girl2Time; delete payload.girl2Place; delete payload.girl2Pincode;
             }
 
             const apiUrl = import.meta.env.VITE_API_URL || '';
