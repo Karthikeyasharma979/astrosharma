@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Layout } from './components/Layout';
+import { NetworkStatus } from './components/NetworkStatus';
 import { Loader2 } from 'lucide-react';
 
 import Home from './pages/Home';
@@ -71,6 +72,7 @@ function App() {
     return (
         <Router>
             <ScrollToTop />
+            <NetworkStatus />
             <Layout>
                 <AnimatedRoutes />
             </Layout>

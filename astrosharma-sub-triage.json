@@ -1,0 +1,59 @@
+{
+  "name": "2. Sub-Workflow: AI Triage",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "1",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [200, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const { text, session, userId, phone } = $input.first().json;\nconst systemPrompt = `You are Jyoti, the front-desk assistant for AstroSharma. Recommend packages: DEEP_CHART_ANALYSIS, MATCHMAKING, or MUHURTHAM. Keep it short. End with: 'Shall I help you book this consultation?'`;\nreturn [{ json: { userId, phone, text, session, llmPayload: { model: 'gemini-1.5-flash', systemPrompt, userMessage: text } } }];"
+      },
+      "id": "7",
+      "name": "Build LLM Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [400, 300]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.llmPayload.userMessage }}",
+        "messages": { "messageValues": [ { "type": "system", "message": "={{ $json.llmPayload.systemPrompt }}" } ] }
+      },
+      "id": "8",
+      "name": "Smart AI Triage",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [600, 300]
+    },
+    {
+      "parameters": { "modelName": "models/gemini-1.5-flash" },
+      "id": "9",
+      "name": "Google Gemini",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [600, 500]
+    },
+    {
+      "parameters": {
+        "jsCode": "const llmText = $input.first().json.text || '';\nconst prev = $('Build LLM Prompt').first().json;\nconst userText = prev.llmPayload?.userMessage?.toLowerCase() || '';\nconst session = prev.session || {};\nconst userWantsToBook = ['yes', 'book', 'proceed', 'ok'].some(t => userText.includes(t));\nlet pkg = session.recommendedPackage;\nif (llmText.includes('Deep Chart')) pkg = 'DEEP_CHART_ANALYSIS';\nif (llmText.includes('Matchmaking')) pkg = 'MATCHMAKING';\nif (llmText.includes('Muhurtham')) pkg = 'MUHURTHAM';\nconst updatedSession = { ...session, recommendedPackage: pkg, messageCount: (session.messageCount || 0) + 1, state: userWantsToBook ? 'CHECKOUT' : 'TRIAGE', checkoutStep: userWantsToBook ? 'NAME' : null };\nconst replyText = userWantsToBook ? `Wonderful! Let me get a few details. Could you please share the name?` : llmText;\nreturn [{ json: { userId: prev.userId, phone: prev.phone, text: prev.text, replyText, session: updatedSession } }];"
+      },
+      "id": "10",
+      "name": "Parse Intent",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [800, 300]
+    }
+  ],
+  "connections": {
+    "Execute Workflow Trigger": { "main": [ [ { "node": "Build LLM Prompt", "type": "main", "index": 0 } ] ] },
+    "Build LLM Prompt": { "main": [ [ { "node": "Smart AI Triage", "type": "main", "index": 0 } ] ] },
+    "Smart AI Triage": { "main": [ [ { "node": "Parse Intent", "type": "main", "index": 0 } ] ] },
+    "Google Gemini": { "ai_languageModel": [ [ { "node": "Smart AI Triage", "type": "ai_languageModel", "index": 0 } ] ] }
+  }
+}

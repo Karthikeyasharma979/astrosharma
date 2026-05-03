@@ -74,18 +74,18 @@ export const Navbar = () => {
             </div>
 
             {/* Mobile Navbar (Simplified) */}
-            <div className="fixed top-0 left-0 right-0 z-50 lg:hidden p-4">
-                <div className="glass-temple flex justify-between items-center p-4">
-                    <Link to="/" className="flex items-center gap-2">
-                        <img src={logo} alt="Logo" className="w-8 h-8 rounded-full" />
-                        <span className="font-serif font-bold text-temple-saffron dark:text-temple-gold">AstroSharma</span>
+            <div className="fixed top-0 left-0 right-0 z-50 lg:hidden bg-white/80 dark:bg-black/80 backdrop-blur-xl border-b border-temple-gold/20 shadow-sm">
+                <div className="flex justify-between items-center px-4 py-3">
+                    <Link to="/" className="flex items-center gap-3">
+                        <img src={logo} alt="Logo" className="w-9 h-9 rounded-full shadow-sm" />
+                        <span className="font-serif font-bold text-temple-saffron dark:text-temple-gold text-lg tracking-wide">AstroSharma</span>
                     </Link>
                     <div className="flex items-center gap-3">
-                        <button onClick={toggleTheme}>
+                        <button onClick={toggleTheme} className="p-2 bg-black/5 dark:bg-white/5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors">
                             {theme === 'dark' ? <Sun className="w-5 h-5 text-temple-gold" /> : <Moon className="w-5 h-5 text-temple-saffron" />}
                         </button>
-                        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-                            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 bg-black/5 dark:bg-white/5 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors">
+                            {isMobileMenuOpen ? <X className="w-6 h-6 text-gray-800 dark:text-white" /> : <Menu className="w-6 h-6 text-gray-800 dark:text-white" />}
                         </button>
                     </div>
                 </div>
@@ -98,18 +98,18 @@ export const Navbar = () => {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="fixed top-24 left-4 right-4 z-40 lg:hidden"
+                        className="fixed top-[60px] left-0 right-0 z-40 lg:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-temple-gold/20 shadow-2xl"
                     >
-                        <div className="glass-temple p-4 flex flex-col gap-2">
+                        <div className="p-4 flex flex-col gap-2">
                             {navItems.map((item) => (
                                 <Link
                                     key={item.path}
                                     to={item.path}
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className="p-3 rounded-xl hover:bg-temple-saffron/10 dark:hover:bg-temple-gold/10 flex items-center gap-3"
+                                    className="p-4 rounded-xl hover:bg-temple-saffron/10 dark:hover:bg-temple-gold/10 flex items-center gap-4 transition-all"
                                 >
                                     <item.icon className="w-5 h-5 text-temple-saffron dark:text-temple-gold" />
-                                    <span className="font-medium text-gray-800 dark:text-gray-100">{item.label}</span>
+                                    <span className="font-bold text-gray-800 dark:text-gray-100">{item.label}</span>
                                 </Link>
                             ))}
                         </div>

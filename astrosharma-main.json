@@ -1,0 +1,171 @@
+{
+  "name": "1. Main Router (AstroSharma Bot)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "whatsapp-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "1",
+      "name": "WhatsApp Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [200, 300]
+    },
+    {
+      "parameters": { "respondWith": "text", "responseBody": "OK", "options": { "responseCode": 200 } },
+      "id": "2",
+      "name": "Respond 200 Immediately",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [400, 100]
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body;\nconst entry = body?.entry?.[0];\nconst message = entry?.changes?.[0]?.value?.messages?.[0];\nif (!message || message.type !== 'text') return [];\nreturn [{ json: { userId: message.from, phone: message.from, text: message.text?.body?.trim() || '' } }];"
+      },
+      "id": "3",
+      "name": "Extract Message",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [400, 300]
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "={{ $env.SUPABASE_URL }}/rest/v1/sessions?user_id=eq.{{ $json.userId }}&select=*",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [ { "name": "apikey", "value": "={{ $env.SUPABASE_KEY }}" }, { "name": "Authorization", "value": "=Bearer {{ $env.SUPABASE_KEY }}" } ] },
+        "options": { "response": { "response": { "neverError": true } } }
+      },
+      "id": "4",
+      "name": "Load Session",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [600, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const msgData = $('Extract Message').first().json;\nconst sessionRows = $input.first().json;\nconst session = (Array.isArray(sessionRows) && sessionRows.length > 0) ? sessionRows[0].data : { state: 'TRIAGE', checkoutStep: null, collectedData: {}, recommendedPackage: null, messageCount: 0 };\nif (session.messageCount > 12 && session.state === 'TRIAGE') session.state = 'ESCALATE';\nreturn [{ json: { userId: msgData.userId, phone: msgData.phone, text: msgData.text, session } }];"
+      },
+      "id": "5",
+      "name": "Init Session",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [800, 300]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "rules": [
+            { "conditions": { "options": { "caseSensitive": false, "typeValidation": "strict" }, "conditions": [ { "leftValue": "={{ $json.session.state }}", "rightValue": "TRIAGE", "operator": { "type": "string", "operation": "equals" } } ], "combinator": "and" }, "renameOutput": true, "outputKey": "TRIAGE" },
+            { "conditions": { "options": { "caseSensitive": false, "typeValidation": "strict" }, "conditions": [ { "leftValue": "={{ $json.session.state }}", "rightValue": "CHECKOUT", "operator": { "type": "string", "operation": "equals" } } ], "combinator": "and" }, "renameOutput": true, "outputKey": "CHECKOUT" },
+            { "conditions": { "options": { "caseSensitive": false, "typeValidation": "strict" }, "conditions": [ { "leftValue": "={{ $json.session.state }}", "rightValue": "ESCALATE", "operator": { "type": "string", "operation": "equals" } } ], "combinator": "and" }, "renameOutput": true, "outputKey": "ESCALATE" },
+            { "conditions": { "options": { "caseSensitive": false, "typeValidation": "strict" }, "conditions": [ { "leftValue": "={{ $json.session.state }}", "rightValue": "PAYMENT_SENT", "operator": { "type": "string", "operation": "equals" } } ], "combinator": "and" }, "renameOutput": true, "outputKey": "PAYMENT_SENT" }
+          ]
+        }
+      },
+      "id": "6",
+      "name": "State Router",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3,
+      "position": [1000, 300]
+    },
+    {
+      "parameters": {},
+      "id": "7",
+      "name": "Sub-Workflow: Triage",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [1200, 100],
+      "notesInFlow": true,
+      "notes": "DOUBLE CLICK ME -> SELECT TRIAGE WORKFLOW"
+    },
+    {
+      "parameters": {},
+      "id": "8",
+      "name": "Sub-Workflow: Checkout",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [1200, 300],
+      "notesInFlow": true,
+      "notes": "DOUBLE CLICK ME -> SELECT CHECKOUT WORKFLOW"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: { ...$input.first().json, replyText: `I completely understand. Someone from AstroSharma will reach out to you directly.`, session: { ...$input.first().json.session, state: 'ESCALATE' } } }];"
+      },
+      "id": "9",
+      "name": "Prepare Escalation",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1200, 500]
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{ json: { ...$input.first().json, replyText: `Your payment link has already been shared above! Please complete the payment.` } }];"
+      },
+      "id": "10",
+      "name": "Already Sent Reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1200, 700]
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\nreturn [{ json: { userId: data.userId, phone: data.phone, replyText: data.replyText, session: data.session } }];"
+      },
+      "id": "20",
+      "name": "Consolidate Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1600, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.SUPABASE_URL }}/rest/v1/sessions",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [ { "name": "apikey", "value": "={{ $env.SUPABASE_KEY }}" }, { "name": "Authorization", "value": "=Bearer {{ $env.SUPABASE_KEY }}" }, { "name": "Content-Type", "value": "application/json" }, { "name": "Prefer", "value": "resolution=merge-duplicates" } ] },
+        "sendBody": true,
+        "bodyParameters": { "parameters": [ { "name": "user_id", "value": "={{ $json.userId }}" }, { "name": "data", "value": "={{ JSON.stringify($json.session) }}" } ] }
+      },
+      "id": "16",
+      "name": "Save Session",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1800, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{ $env.WHATSAPP_PHONE_NUMBER_ID }}/messages",
+        "sendHeaders": true,
+        "headerParameters": { "parameters": [ { "name": "Authorization", "value": "=Bearer {{ $env.WHATSAPP_TOKEN }}" }, { "name": "Content-Type", "value": "application/json" } ] },
+        "sendBody": true,
+        "bodyParameters": { "parameters": [ { "name": "messaging_product", "value": "whatsapp" }, { "name": "to", "value": "={{ $json.phone }}" }, { "name": "type", "value": "text" }, { "name": "text", "value": "={{ JSON.stringify({ body: $json.replyText }) }}" } ] }
+      },
+      "id": "15",
+      "name": "Send WhatsApp",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1800, 400]
+    }
+  ],
+  "connections": {
+    "WhatsApp Webhook": { "main": [ [ { "node": "Respond 200 Immediately", "type": "main", "index": 0 }, { "node": "Extract Message", "type": "main", "index": 0 } ] ] },
+    "Extract Message": { "main": [ [ { "node": "Load Session", "type": "main", "index": 0 } ] ] },
+    "Load Session": { "main": [ [ { "node": "Init Session", "type": "main", "index": 0 } ] ] },
+    "Init Session": { "main": [ [ { "node": "State Router", "type": "main", "index": 0 } ] ] },
+    "State Router": { "main": [ [ { "node": "Sub-Workflow: Triage", "type": "main", "index": 0 } ], [ { "node": "Sub-Workflow: Checkout", "type": "main", "index": 0 } ], [ { "node": "Prepare Escalation", "type": "main", "index": 0 } ], [ { "node": "Already Sent Reply", "type": "main", "index": 0 } ] ] },
+    "Sub-Workflow: Triage": { "main": [ [ { "node": "Consolidate Data", "type": "main", "index": 0 } ] ] },
+    "Sub-Workflow: Checkout": { "main": [ [ { "node": "Consolidate Data", "type": "main", "index": 0 } ] ] },
+    "Prepare Escalation": { "main": [ [ { "node": "Consolidate Data", "type": "main", "index": 0 } ] ] },
+    "Already Sent Reply": { "main": [ [ { "node": "Consolidate Data", "type": "main", "index": 0 } ] ] },
+    "Consolidate Data": { "main": [ [ { "node": "Save Session", "type": "main", "index": 0 }, { "node": "Send WhatsApp", "type": "main", "index": 0 } ] ] }
+  }
+}
