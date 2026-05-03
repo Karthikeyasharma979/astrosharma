@@ -482,7 +482,7 @@ const Consultation = () => {
             const apiUrl = import.meta.env.VITE_API_URL || '';
 
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+            const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 
             let orderRes;
             try {
@@ -548,6 +548,7 @@ const Consultation = () => {
                 setIsSubmitting(false);
             });
 
+            setIsSubmitting(false);
             paymentObject.open();
 
         } catch (error) {
@@ -558,6 +559,7 @@ const Consultation = () => {
     };
 
     const handleVerifyAndBook = async (paymentResponse) => {
+        setIsSubmitting(true);
         try {
             // Use JSON payload to ensure consistent data structure
             const typeInfo = consultationTypes.find(t => t.id === selectedType);
@@ -591,7 +593,7 @@ const Consultation = () => {
             const apiUrl = import.meta.env.VITE_API_URL || '';
 
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout
+            const timeoutId = setTimeout(() => controller.abort(), 45000); // 45 second timeout
 
             let response;
             try {
