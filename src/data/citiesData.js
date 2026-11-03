@@ -1,0 +1,51 @@
+// Curated database of major Indian cities, state capitals, and international hubs
+export const CITIES_DATABASE = [
+    // South India
+    { name: "Hyderabad", state: "Telangana", country: "India", lat: 17.3850, lon: 78.4867, tz: 5.5, telugu: "హైదరాబాద్" },
+    { name: "Vijayawada", state: "Andhra Pradesh", country: "India", lat: 16.5062, lon: 80.6480, tz: 5.5, telugu: "విజయవాడ" },
+    { name: "Visakhapatnam", state: "Andhra Pradesh", country: "India", lat: 17.6868, lon: 83.2185, tz: 5.5, telugu: "విశాఖపట్నం" },
+    { name: "Tirupati", state: "Andhra Pradesh", country: "India", lat: 13.6288, lon: 79.4192, tz: 5.5, telugu: "తిరుపతి" },
+    { name: "Guntur", state: "Andhra Pradesh", country: "India", lat: 16.3067, lon: 80.4365, tz: 5.5, telugu: "గుంటూరు" },
+    { name: "Warangal", state: "Telangana", country: "India", lat: 17.9689, lon: 79.5941, tz: 5.5, telugu: "వరంగల్" },
+    { name: "Kurnool", state: "Andhra Pradesh", country: "India", lat: 15.8281, lon: 78.0373, tz: 5.5, telugu: "కర్నూలు" },
+    { name: "Rajahmundry", state: "Andhra Pradesh", country: "India", lat: 17.0005, lon: 81.8040, tz: 5.5, telugu: "రాజమండ్రి" },
+    { name: "Nellore", state: "Andhra Pradesh", country: "India", lat: 14.4426, lon: 79.9865, tz: 5.5, telugu: "నెల్లూరు" },
+    { name: "Bengaluru (Bangalore)", state: "Karnataka", country: "India", lat: 12.9716, lon: 77.5946, tz: 5.5, telugu: "బెంగళూరు" },
+    { name: "Chennai (Madras)", state: "Tamil Nadu", country: "India", lat: 13.0827, lon: 80.2707, tz: 5.5, telugu: "చెన్నై" },
+    { name: "Coimbatore", state: "Tamil Nadu", country: "India", lat: 11.0168, lon: 76.9558, tz: 5.5, telugu: "కోయంబత్తూరు" },
+    { name: "Madurai", state: "Tamil Nadu", country: "India", lat: 9.9252, lon: 78.1198, tz: 5.5, telugu: "మధురై" },
+    { name: "Kochi (Cochin)", state: "Kerala", country: "India", lat: 9.9312, lon: 76.2673, tz: 5.5, telugu: "కొచ్చి" },
+    { name: "Thiruvananthapuram", state: "Kerala", country: "India", lat: 8.5241, lon: 76.9366, tz: 5.5, telugu: "తిరువనంతపురం" },
+    { name: "Mysuru (Mysore)", state: "Karnataka", country: "India", lat: 12.2958, lon: 76.6394, tz: 5.5, telugu: "మైసూరు" },
+
+    // North & Central India
+    { name: "New Delhi", state: "Delhi", country: "India", lat: 28.6139, lon: 77.2090, tz: 5.5, telugu: "న్యూఢిల్లీ" },
+    { name: "Mumbai (Bombay)", state: "Maharashtra", country: "India", lat: 19.0760, lon: 72.8777, tz: 5.5, telugu: "ముంబై" },
+    { name: "Pune", state: "Maharashtra", country: "India", lat: 18.5204, lon: 73.8567, tz: 5.5, telugu: "పుణె" },
+    { name: "Nagpur", state: "Maharashtra", country: "India", lat: 21.1458, lon: 79.0882, tz: 5.5, telugu: "నాగ్‌పూర్" },
+    { name: "Kolkata (Calcutta)", state: "West Bengal", country: "India", lat: 22.5726, lon: 88.3639, tz: 5.5, telugu: "కోల్‌కతా" },
+    { name: "Ahmedabad", state: "Gujarat", country: "India", lat: 23.0225, lon: 72.5714, tz: 5.5, telugu: "అహ్మదాబాద్" },
+    { name: "Surat", state: "Gujarat", country: "India", lat: 21.1702, lon: 72.8311, tz: 5.5, telugu: "సూరత్" },
+    { name: "Jaipur", state: "Rajasthan", country: "India", lat: 26.9124, lon: 75.7873, tz: 5.5, telugu: "జైపూర్" },
+    { name: "Lucknow", state: "Uttar Pradesh", country: "India", lat: 26.8467, lon: 80.9462, tz: 5.5, telugu: "లక్నో" },
+    { name: "Varanasi (Kashi)", state: "Uttar Pradesh", country: "India", lat: 25.3176, lon: 82.9739, tz: 5.5, telugu: "వారణాసి" },
+    { name: "Ayodhya", state: "Uttar Pradesh", country: "India", lat: 26.7922, lon: 82.1998, tz: 5.5, telugu: "అయోధ్య" },
+    { name: "Kanpur", state: "Uttar Pradesh", country: "India", lat: 26.4499, lon: 80.3319, tz: 5.5, telugu: "కాన్పూర్" },
+    { name: "Patna", state: "Bihar", country: "India", lat: 25.5941, lon: 85.1376, tz: 5.5, telugu: "పాట్నా" },
+    { name: "Bhopal", state: "Madhya Pradesh", country: "India", lat: 23.2599, lon: 77.4126, tz: 5.5, telugu: "భోపాల్" },
+    { name: "Indore", state: "Madhya Pradesh", country: "India", lat: 22.7196, lon: 75.8577, tz: 5.5, telugu: "ఇండోర్" },
+    { name: "Chandigarh", state: "Punjab/Haryana", country: "India", lat: 30.7333, lon: 76.7794, tz: 5.5, telugu: "చండీగఢ్" },
+    { name: "Bhubaneswar", state: "Odisha", country: "India", lat: 20.2961, lon: 85.8245, tz: 5.5, telugu: "భువనేశ్వర్" },
+    { name: "Guwahati", state: "Assam", country: "India", lat: 26.1445, lon: 91.7362, tz: 5.5, telugu: "గువహాటి" },
+
+    // International Diaspora Hubs
+    { name: "Dallas, TX", state: "Texas", country: "USA", lat: 32.7767, lon: -96.7970, tz: -5.0, telugu: "డల్లాస్ (USA)" },
+    { name: "San Jose / Bay Area, CA", state: "California", country: "USA", lat: 37.3382, lon: -121.8863, tz: -7.0, telugu: "శాన్ జోస్ (USA)" },
+    { name: "Edison / New Jersey", state: "New Jersey", country: "USA", lat: 40.5187, lon: -74.4121, tz: -4.0, telugu: "న్యూజెర్సీ (USA)" },
+    { name: "Chicago, IL", state: "Illinois", country: "USA", lat: 41.8781, lon: -87.6298, tz: -5.0, telugu: "చికాగో (USA)" },
+    { name: "London", state: "Greater London", country: "United Kingdom", lat: 51.5074, lon: -0.1278, tz: 1.0, telugu: "లండన్ (UK)" },
+    { name: "Dubai", state: "Dubai", country: "UAE", lat: 25.2048, lon: 55.2708, tz: 4.0, telugu: "దుబాయ్ (UAE)" },
+    { name: "Singapore", state: "Central", country: "Singapore", lat: 1.3521, lon: 103.8198, tz: 8.0, telugu: "సింగపూర్" },
+    { name: "Sydney", state: "NSW", country: "Australia", lat: -33.8688, lon: 151.2093, tz: 10.0, telugu: "సిడ్నీ (Australia)" },
+    { name: "Toronto", state: "Ontario", country: "Canada", lat: 43.6532, lon: -79.3832, tz: -4.0, telugu: "టొరంటో (Canada)" }
+];

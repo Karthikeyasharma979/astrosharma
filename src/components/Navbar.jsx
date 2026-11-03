@@ -1,26 +1,43 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { Sun, Moon, Menu, X, Home, Calendar, HelpCircle, User } from 'lucide-react';
+import { Sun, Moon, Menu, X, Home, Calendar, HelpCircle, User, Clock, Star, PhoneCall } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import logo from '../assets/logo_transparent.png';
 
+import { FestiveBanner } from './FestiveBanner';
+
 export const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isBannerVisible, setIsBannerVisible] = useState(() => {
+        try {
+            return sessionStorage.getItem('astro_festival_banner_dismissed') !== 'true';
+        } catch {
+            return true;
+        }
+    });
     const { theme, toggleTheme } = useTheme();
     const location = useLocation();
 
     const navItems = [
         { label: 'Home', path: '/', icon: Home },
+        { label: 'Get Kundli', path: '/kundli', icon: Star },
         { label: 'Panchang', path: '/daily-panchang', icon: Calendar },
+        { label: 'Track Status', path: '/track', icon: Clock },
         { label: 'Help', path: '/help', icon: HelpCircle },
     ];
 
     return (
         <>
-            {/* Desktop Static Navbar */}
-            <div
-                className="absolute top-6 left-0 right-0 z-50 hidden lg:flex justify-center"
+            {/* Top Festive Announcement Bar */}
+            <FestiveBanner onVisibilityChange={setIsBannerVisible} />
+
+            {/* Desktop Static Navbar (smoothly moves back up to top-4 when banner is dismissed) */}
+            <motion.div
+                initial={false}
+                animate={{ top: isBannerVisible ? '3.5rem' : '1rem' }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="absolute left-0 right-0 z-50 hidden lg:flex justify-center"
             >
                 <div className="glass-temple px-6 py-3 flex items-center gap-8 bg-white/70 dark:bg-black/60 backdrop-blur-xl border-white/20 dark:border-white/10">
 
@@ -35,10 +52,10 @@ export const Navbar = () => {
                     {/* Nav Items */}
                     <div className="flex items-center gap-1">
                         {navItems.map((item) => {
-                            const isActive = location.pathname === item.path;
+                            const isActive = location.pathname === item.path || (item.path !== '/' && location.pathname.startsWith(item.path));
                             return (
-                                <Link key={item.path} to={item.path} className="relative px-4 py-2 group">
-                                    <span className={`relative z-10 text-sm font-medium transition-colors duration-300 ${isActive ? 'text-temple-saffron dark:text-temple-gold' : 'text-gray-600 dark:text-gray-300 group-hover:text-temple-saffron dark:group-hover:text-temple-gold'}`}>
+                                <Link key={item.path} to={item.path} className="relative px-4 py-2 group flex items-center gap-1.5">
+                                    <span className={`relative z-10 text-sm font-medium transition-colors duration-300 flex items-center gap-1.5 ${isActive ? 'text-temple-saffron dark:text-temple-gold' : 'text-gray-600 dark:text-gray-300 group-hover:text-temple-saffron dark:group-hover:text-temple-gold'}`}>
                                         {item.label}
                                     </span>
                                     {isActive && (
@@ -71,10 +88,10 @@ export const Navbar = () => {
                         </button>
                     </div>
                 </div>
-            </div>
+            </motion.div>
 
             {/* Mobile Navbar (Simplified) */}
-            <div className="fixed top-0 left-0 right-0 z-50 lg:hidden bg-white/80 dark:bg-black/80 backdrop-blur-xl border-b border-temple-gold/20 shadow-sm">
+            <div className={`fixed left-0 right-0 z-50 lg:hidden bg-white/80 dark:bg-black/80 backdrop-blur-xl border-b border-temple-gold/20 shadow-sm transition-all duration-300 ${isBannerVisible ? 'top-[42px]' : 'top-0'}`}>
                 <div className="flex justify-between items-center px-4 py-3">
                     <Link to="/" className="flex items-center gap-3">
                         <img src={logo} alt="Logo" className="w-9 h-9 rounded-full shadow-sm" />
@@ -98,7 +115,7 @@ export const Navbar = () => {
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="fixed top-[60px] left-0 right-0 z-40 lg:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-temple-gold/20 shadow-2xl"
+                        className={`fixed left-0 right-0 z-40 lg:hidden bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-temple-gold/20 shadow-2xl transition-all duration-300 ${isBannerVisible ? 'top-[102px]' : 'top-[60px]'}`}
                     >
                         <div className="p-4 flex flex-col gap-2">
                             {navItems.map((item) => (
@@ -109,7 +126,9 @@ export const Navbar = () => {
                                     className="p-4 rounded-xl hover:bg-temple-saffron/10 dark:hover:bg-temple-gold/10 flex items-center gap-4 transition-all"
                                 >
                                     <item.icon className="w-5 h-5 text-temple-saffron dark:text-temple-gold" />
-                                    <span className="font-bold text-gray-800 dark:text-gray-100">{item.label}</span>
+                                    <div className="flex items-center gap-2">
+                                        <span className="font-bold text-gray-800 dark:text-gray-100">{item.label}</span>
+                                    </div>
                                 </Link>
                             ))}
                         </div>

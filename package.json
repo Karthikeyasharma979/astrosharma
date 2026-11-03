@@ -6,7 +6,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "server": "node server/index.js",
     "build": "vite build",
+    "test": "node test/kundli_suite.js && node test/kp_kundli_suite.js && node test/vimshottari_dasha_suite.js && node test/kp_aspects_suite.js && node test/test_all_249_subs.js && node test/independent_multi_audit.js && node test/location_and_geocoding_suite.js",
+    "test:location": "node test/location_and_geocoding_suite.js",
+    "test:kp": "node test/kp_kundli_suite.js && node test/vimshottari_dasha_suite.js && node test/kp_aspects_suite.js && node test/test_all_249_subs.js",
+    "test:dasha": "node test/vimshottari_dasha_suite.js",
+    "test:vedic": "node test/kundli_suite.js",
+    "test:audit": "node test/independent_multi_audit.js",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -14,6 +21,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "astronomy-engine": "^2.1.19",
     "axios": "^1.13.2",
     "bcryptjs": "^3.0.3",
     "clsx": "^2.1.1",
@@ -26,8 +34,11 @@
     "file-type": "^21.3.0",
     "framer-motion": "^12.26.2",
     "helmet": "^8.1.0",
+    "html2canvas": "^1.4.1",
     "joi": "^18.0.2",
     "jsonwebtoken": "^9.0.3",
+    "jspdf": "^4.2.1",
+    "leaflet": "^1.9.4",
     "lucide-react": "^0.562.0",
     "mongoose": "^9.4.1",
     "multer": "^1.4.5-lts.1",
@@ -40,9 +51,13 @@
     "react-google-recaptcha": "^3.1.0",
     "react-google-recaptcha-v3": "^1.11.0",
     "react-icons": "^5.5.0",
+    "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.12.0",
+    "socket.io-client": "^4.8.4",
+    "sweph": "^2.10.3-8",
     "tailwind-merge": "^3.4.0",
     "tesseract.js": "^7.0.0",
+    "tz-lookup": "^6.1.25",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

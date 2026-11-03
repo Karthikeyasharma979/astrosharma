@@ -50,18 +50,18 @@ export const Hero = () => {
                         transition={{ duration: 0.8 }}
                         className="mb-4"
                     >
-                        <h2 className="text-lg md:text-2xl font-medium text-blue-700 dark:text-blue-300 mb-1 font-telugu tracking-wide">శుభం శంకరం</h2>
-                        <h1 className="text-2xl md:text-4xl font-bold text-[#D9381E] dark:text-red-400 mb-4 font-telugu">అన్నపూర్ణ జ్యోతిష్యాలయం</h1>
+                        <h2 className="text-lg md:text-2xl font-medium text-blue-700 dark:text-blue-300 mb-2 font-telugu tracking-wide leading-normal">శుభం శంకరం</h2>
+                        <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold text-[#D9381E] dark:text-red-400 mb-4 md:mb-6 font-telugu leading-relaxed sm:leading-relaxed md:leading-relaxed pb-3 pt-1">అన్నపూర్ణ జ్యోతిష్యాలయం</h1>
                     </motion.div>
-                    <motion.h1
+                    <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold leading-tight mb-4 md:mb-6 text-temple-navy dark:text-[#F3E5AB]"
+                        className="font-serif text-2xl md:text-4xl font-bold leading-tight mb-4 md:mb-6 text-temple-navy dark:text-[#F3E5AB]"
                     >
                         Navigate Your Life <br className="hidden sm:block" />
                         with Cosmic Precision
-                    </motion.h1>
+                    </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -74,12 +74,20 @@ export const Hero = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.4 }}
+                        className="flex flex-wrap items-center justify-center lg:justify-start gap-4"
                     >
                         <Link
                             to="/consultation"
                             className="inline-block bg-gradient-to-r from-[#E68A5C] to-[#D97736] text-white px-8 py-3.5 rounded-full font-bold text-base hover:brightness-110 active:scale-95 transition-all shadow-lg hover:shadow-orange-500/30"
                         >
                             Book Your Consultation
+                        </Link>
+                        <Link
+                            to="/kundli"
+                            className="inline-flex items-center gap-2 bg-white/90 dark:bg-white/10 hover:bg-white dark:hover:bg-white/20 text-orange-900 dark:text-amber-300 border-2 border-orange-300/80 dark:border-amber-500/30 px-6 py-3.5 rounded-full font-bold text-base transition-all shadow-md active:scale-95"
+                        >
+                            <span>Get Kundli</span>
+                            <span className="text-orange-500 dark:text-amber-400">✦</span>
                         </Link>
                     </motion.div>
                 </div>

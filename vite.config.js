@@ -25,6 +25,13 @@ export default defineConfig({
   },
   server: {
     port: 5173,
-    host: true, // Listen on all addresses (optional, but good for testing on mobile via LAN)
+    host: true, // Listen on all network interfaces (LAN)
+    allowedHosts: true, // Allow localtunnel, ngrok, cloudflare tunnels
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:5000',
+        changeOrigin: true,
+      },
+    },
   },
 })

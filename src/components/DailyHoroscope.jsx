@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Moon, Sun } from 'lucide-react';
 import { BorderBeam } from './ui/BorderBeam';
 import {
     Aries, Taurus, Gemini, Cancer, Leo, VirgoReal, Libra, Scorpio,
@@ -10,7 +9,7 @@ import {
 const ZODIAC_SIGNS = [
     {
         name: 'మేషం',
-        date: 'Mar 21 - Apr 19',
+        date: 'Apr 14 - May 14',
         element: 'Fire',
         color: 'text-red-500',
         borderColor: 'border-red-200',
@@ -20,7 +19,7 @@ const ZODIAC_SIGNS = [
     },
     {
         name: 'వృషభం',
-        date: 'Apr 20 - May 20',
+        date: 'May 15 - Jun 14',
         element: 'Earth',
         color: 'text-emerald-500',
         borderColor: 'border-emerald-200',
@@ -30,7 +29,7 @@ const ZODIAC_SIGNS = [
     },
     {
         name: 'మిథునం',
-        date: 'May 21 - Jun 20',
+        date: 'Jun 15 - Jul 16',
         element: 'Air',
         color: 'text-yellow-600',
         borderColor: 'border-yellow-200',
@@ -40,7 +39,7 @@ const ZODIAC_SIGNS = [
     },
     {
         name: 'కర్కాటకం',
-        date: 'Jun 21 - Jul 22',
+        date: 'Jul 17 - Aug 16',
         element: 'Water',
         color: 'text-sky-500',
         borderColor: 'border-sky-200',
@@ -50,7 +49,7 @@ const ZODIAC_SIGNS = [
     },
     {
         name: 'సింహం',
-        date: 'Jul 23 - Aug 22',
+        date: 'Aug 17 - Sep 16',
         element: 'Fire',
         color: 'text-orange-500',
         borderColor: 'border-orange-200',
@@ -60,7 +59,7 @@ const ZODIAC_SIGNS = [
     },
     {
         name: 'కన్య',
-        date: 'Aug 23 - Sep 22',
+        date: 'Sep 17 - Oct 17',
         element: 'Earth',
         color: 'text-green-600',
         borderColor: 'border-green-200',
@@ -70,7 +69,7 @@ const ZODIAC_SIGNS = [
     },
     {
         name: 'తుల',
-        date: 'Sep 23 - Oct 22',
+        date: 'Oct 18 - Nov 16',
         element: 'Air',
         color: 'text-pink-500',
         borderColor: 'border-pink-200',
@@ -80,7 +79,7 @@ const ZODIAC_SIGNS = [
     },
     {
         name: 'వృశ్చికం',
-        date: 'Oct 23 - Nov 21',
+        date: 'Nov 17 - Dec 15',
         element: 'Water',
         color: 'text-purple-600',
         borderColor: 'border-purple-200',
@@ -89,18 +88,18 @@ const ZODIAC_SIGNS = [
         about: 'వృశ్చిక రాశి వారు దృఢ నిశ్చయం కలవారు మరియు మక్కువ గలవారు. వారు రహస్యాలను ఛేదించడంలో మరియు నిజం తెలుసుకోవడంలో ఆసక్తి చూపుతారు.'
     },
     {
-        name: 'ధనుస్సు',
-        date: 'Nov 22 - Dec 21',
+        name: 'ధనస్సు',
+        date: 'Dec 16 - Jan 14',
         element: 'Fire',
         color: 'text-orange-600',
         borderColor: 'border-orange-200',
         bgGradient: 'from-orange-50 to-red-50',
         icon: Sagittarius,
-        about: 'ధనుస్సు రాశి వారు ఆశావాదులు మరియు సాహసోపేతమైనవారు. వారు ప్రయాణాలను మరియు కొత్త సంస్కృతులను ఇష్టపడతారు.'
+        about: 'ధనస్సు రాశి వారు ఆశావాదులు మరియు సాహసోపేతమైనవారు. వారు ప్రయాణాలను మరియు కొత్త సంస్కృతులను ఇష్టపడతారు.'
     },
     {
         name: 'మకరం',
-        date: 'Dec 22 - Jan 19',
+        date: 'Jan 15 - Feb 12',
         element: 'Earth',
         color: 'text-stone-600',
         borderColor: 'border-stone-200',
@@ -110,7 +109,7 @@ const ZODIAC_SIGNS = [
     },
     {
         name: 'కుంభం',
-        date: 'Jan 20 - Feb 18',
+        date: 'Feb 13 - Mar 14',
         element: 'Air',
         color: 'text-cyan-600',
         borderColor: 'border-cyan-200',
@@ -120,7 +119,7 @@ const ZODIAC_SIGNS = [
     },
     {
         name: 'మీనం',
-        date: 'Feb 19 - Mar 20',
+        date: 'Mar 15 - Apr 13',
         element: 'Water',
         color: 'text-indigo-500',
         borderColor: 'border-indigo-200',
@@ -190,7 +189,7 @@ export const DailyHoroscope = () => {
                                 <div className={`w-20 h-20 mx-auto mb-6 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center border-2 border-orange-100 dark:border-slate-600 group-hover:border-orange-400 transition-colors shadow-inner`}>
                                     <sign.icon className={`w-10 h-10 text-slate-600 dark:text-slate-400 group-hover:text-orange-600 transition-colors duration-300`} />
                                 </div>
-                                <h3 className="text-xl font-serif font-bold text-slate-800 dark:text-orange-100 mb-2 group-hover:text-orange-700 transition-colors">{sign.name}</h3>
+                                <h3 className="text-xl font-telugu font-bold text-slate-800 dark:text-orange-100 mb-2 group-hover:text-orange-700 transition-colors leading-normal pb-1">{sign.name}</h3>
                                 <div className="h-[2px] w-12 bg-orange-200 mx-auto my-3 group-hover:w-20 transition-all duration-300" />
                                 <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest group-hover:text-orange-500 transition-colors">{sign.element}</p>
                             </div>
@@ -213,12 +212,12 @@ export const DailyHoroscope = () => {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.9, y: 20 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="bg-[#FFF8E7] dark:bg-slate-900 border-4 border-double border-orange-200 dark:border-orange-700 rounded-lg w-full max-w-lg p-8 relative shadow-2xl"
+                            className="bg-[#FFF8E7] dark:bg-slate-900 border-4 border-double border-orange-200 dark:border-orange-700 rounded-2xl w-full max-w-lg p-6 sm:p-8 relative shadow-2xl"
                             style={{ backgroundImage: "url('https://www.transparenttextures.com/patterns/paper.png')" }}
                         >
                             {/* Ornate Header */}
                             <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-orange-600 text-white px-6 py-2 rounded-full shadow-lg border-2 border-orange-400">
-                                <span className="font-serif font-bold tracking-widest">RAASI PHALALU</span>
+                                <span className="font-serif font-bold tracking-widest text-sm">RAASI PHALALU</span>
                             </div>
 
                             <button
@@ -228,26 +227,21 @@ export const DailyHoroscope = () => {
                                 <span className="text-2xl">✕</span>
                             </button>
 
-                            <div className="flex flex-col items-center gap-4 mb-8 mt-4">
+                            <div className="flex flex-col items-center gap-3 mb-6 mt-4">
                                 <div className="w-20 h-20 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center border-2 border-orange-500 shadow-lg">
                                     <selectedSign.icon className={`w-10 h-10 ${selectedSign.color}`} />
                                 </div>
                                 <div className="text-center">
-                                    <h3 className="text-3xl font-serif font-black text-orange-900 dark:text-orange-100">{selectedSign.name}</h3>
-                                    <p className="text-orange-600 dark:text-orange-400 font-medium">{selectedSign.date}</p>
+                                    <h3 className="text-3xl font-telugu font-bold text-orange-900 dark:text-orange-100 leading-normal">{selectedSign.name}</h3>
                                 </div>
                             </div>
 
-                            <div className="bg-white/50 dark:bg-black/30 p-6 rounded-lg border border-orange-100/50 dark:border-orange-900/30 text-center relative overflow-hidden">
-                                <span className="absolute top-0 left-0 text-6xl text-orange-200 dark:text-slate-800 opacity-50 font-serif leading-none">“</span>
-                                <p className="text-lg text-slate-800 dark:text-slate-200 leading-loose font-serif relative z-10">
+                            <div className="bg-white/60 dark:bg-black/30 p-6 rounded-xl border border-orange-100/50 dark:border-orange-900/30 text-center relative">
+                                <span className="absolute top-1 left-2 text-5xl text-orange-200 dark:text-slate-800 opacity-50 font-serif leading-none select-none">“</span>
+                                <p className="text-base sm:text-lg text-slate-800 dark:text-slate-200 leading-relaxed font-telugu relative z-10 pt-2 pb-1">
                                     {selectedSign.about}
                                 </p>
                             </div>
-
-                            <button className="w-full mt-6 py-3 bg-gradient-to-r from-orange-600 to-red-600 rounded-lg text-white font-bold tracking-wide hover:shadow-lg hover:shadow-orange-500/30 transition-shadow">
-                                పూర్తి వివరాలు
-                            </button>
                         </motion.div>
                     </motion.div>
                 )}

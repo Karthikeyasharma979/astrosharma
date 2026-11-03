@@ -34,17 +34,17 @@ export const AnnapurnaStotram = () => {
                         {/* Shubham - Shankaram Badge */}
                         <div className="relative inline-block">
                             <div className="absolute inset-0 bg-orange-100 dark:bg-orange-900/30 blur-xl rounded-full opacity-50"></div>
-                            <div className="relative px-12 py-4 bg-orange-50 dark:bg-slate-800 border-2 border-orange-200 dark:border-orange-700 rounded-full shadow-lg flex items-center gap-6">
-                                <Flame className="w-6 h-6 text-orange-500 animate-pulse" />
-                                <h3 className="text-2xl md:text-3xl font-bold text-orange-800 dark:text-orange-200 font-serif">
+                            <div className="relative px-8 sm:px-12 py-3 sm:py-4 bg-orange-50 dark:bg-slate-800 border-2 border-orange-200 dark:border-orange-700 rounded-full shadow-lg flex items-center gap-4 sm:gap-6">
+                                <Flame className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500 animate-pulse flex-shrink-0" />
+                                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-orange-800 dark:text-orange-200 font-telugu leading-normal py-0.5">
                                     శుభం - శంకరం
                                 </h3>
-                                <Flame className="w-6 h-6 text-orange-500 animate-pulse" />
+                                <Flame className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500 animate-pulse flex-shrink-0" />
                             </div>
                         </div>
 
-                        {/* Main Title */}
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-700 via-red-600 to-orange-700 dark:from-orange-400 dark:via-red-400 dark:to-orange-400 drop-shadow-sm font-serif mb-8">
+                        {/* Main Title - Fixed Telugu Descender Clipping */}
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#D9381E] dark:text-orange-400 font-telugu leading-normal md:leading-relaxed pb-3 pt-1 mb-6 drop-shadow-sm">
                             అన్నపూర్ణ జ్యోతిష్యాలయం
                         </h2>
                     </div>
@@ -78,12 +78,12 @@ export const AnnapurnaStotram = () => {
 
 
 
-                            <div className="space-y-8 bg-orange-50/50 dark:bg-black/20 p-8 rounded-2xl border border-orange-100 dark:border-orange-900/30">
-                                <p className="text-2xl md:text-3xl text-orange-800 dark:text-orange-100 font-serif leading-loose tracking-wide italic">
+                            <div className="space-y-6 bg-orange-50/50 dark:bg-black/20 p-6 sm:p-8 rounded-2xl border border-orange-100 dark:border-orange-900/30">
+                                <p className="text-xl sm:text-2xl md:text-3xl text-orange-800 dark:text-orange-100 font-telugu leading-relaxed tracking-wide">
                                     "అన్నపూర్ణే సదాపూర్ణే శంకర ప్రాణ వల్లభే"
                                 </p>
                                 <div className="w-32 h-px bg-gradient-to-r from-transparent via-orange-400 to-transparent mx-auto" />
-                                <p className="text-2xl md:text-3xl text-orange-800 dark:text-orange-100 font-serif leading-loose tracking-wide italic">
+                                <p className="text-xl sm:text-2xl md:text-3xl text-orange-800 dark:text-orange-100 font-telugu leading-relaxed tracking-wide">
                                     "జ్ఞానవైరాగ్య సిద్ధ్యర్ధం భిక్షాం దేహీ చ పార్వతి"
                                 </p>
                             </div>

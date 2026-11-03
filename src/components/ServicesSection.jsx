@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { BarChart3, Clock, Compass } from 'lucide-react';
 
 const services = [
@@ -53,6 +54,38 @@ export const ServicesSection = () => {
                         </motion.div>
                     ))}
                 </div>
+
+                {/* Promotional KP Kundli Feature Banner */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="max-w-5xl mx-auto mt-10 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-amber-500/10 dark:from-amber-950/40 dark:via-orange-950/30 dark:to-stone-900/40 border border-amber-300/60 dark:border-white/10 shadow-lg flex flex-col md:flex-row items-center justify-between gap-6"
+                >
+                    <div className="flex items-center gap-4">
+                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white shrink-0 shadow-md">
+                            <span className="font-serif font-bold text-xl">KP</span>
+                        </div>
+                        <div>
+                            <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 block font-telugu">
+                                నూతన ఖగోళ విభాగం • Krishnamurti Paddhati
+                            </span>
+                            <h4 className="text-xl font-bold font-serif text-gray-900 dark:text-white font-telugu">
+                                ఉచిత కేపీ కుండలి జనరేటర్ (KP Sub Lord Kundli)
+                            </h4>
+                            <p className="text-xs text-gray-600 dark:text-gray-400 mt-0.5 max-w-xl font-telugu">
+                                ప్లాసిడస్ భావ సంధులు, నక్షత్ర నాథులు, సబ్ లార్డ్స్ మరియు 4-స్థాయి కారకత్వాలతో కూడిన కచ్చితమైన కేపీ జాతక గణన.
+                            </p>
+                        </div>
+                    </div>
+
+                    <Link
+                        to="/kundli?system=kp"
+                        className="px-6 py-3 rounded-full bg-gradient-to-r from-amber-500 via-orange-600 to-amber-600 hover:from-amber-600 hover:to-orange-700 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-orange-500/20 hover:scale-105 active:scale-95 transition-all whitespace-nowrap"
+                    >
+                        Get KP Kundli →
+                    </Link>
+                </motion.div>
             </div>
         </section>
     );
